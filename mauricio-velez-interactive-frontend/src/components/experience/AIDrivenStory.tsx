@@ -55,7 +55,7 @@ export default function AIDrivenStory() {
         clearInterval(interval);
         setIsTyping(false);
         // Reproducir sonido
-        if (msg.soundId) sound.play(msg.soundId);
+        //if (msg.soundId) sound.play(msg.soundId);
         // Esperar la duración y pasar al siguiente paso
         setTimeout(() => {
           setStep(step + 1);
