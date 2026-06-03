@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { knowledgeBase } from './knowledge';
-import { systemPrompt } from './systemPrompt';
+import { knowledgeBase } from '@/lib/aura/knowledge';
+import { systemPrompt } from '@/lib/aura/systemPrompt';
 
 interface Message {
   role: 'user' | 'assistant';
