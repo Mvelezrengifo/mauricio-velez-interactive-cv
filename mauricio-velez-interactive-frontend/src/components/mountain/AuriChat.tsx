@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { knowledgeBase } from '@/lib/aura/knowledge';
-import { systemPrompt } from '@/lib/aura/systemPrompt';
+import { auraSystemPrompt } from '@/lib/aura/context';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -102,7 +102,7 @@ export default function AuraChat({ isOpen, onClose }: AuraChatProps) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               messages: [...messages, { role: 'user', content: userMessage }],
-              systemPrompt,
+              auraSystemPrompt,
               knowledgeBase
             })
           });
