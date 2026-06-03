@@ -5,7 +5,7 @@ import { phases } from "@/lib/storyConfig"; // El guion real
 import Narrator from "@/components/ui/Narrator"; // La voz de Aura
 import StarsCanvas from "@/components/mountain/StarsCanvas"; // El fondo
 import PhaseRenderer from "@/components/mountain/PhaseRenderer"; // El que lanza los proyectos
-import { SoundGenerator } from "@/lib/sound/soundGenerator"; // El sonido
+import { SoundGenerator } from "@/lib/soundGenerator"; // El sonido
 
 export default function MountainExperience() {
   const [currentPhaseIdx, setCurrentPhaseIdx] = useState(0);

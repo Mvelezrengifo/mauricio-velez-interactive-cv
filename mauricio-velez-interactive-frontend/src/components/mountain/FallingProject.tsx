@@ -39,7 +39,7 @@ export default function FallingProject({ project, onClick, onLand }: FallingProj
       initial={{ y: -300, scale: 0.8, opacity: 0 }}
       animate={{ y: landY, scale: 1, opacity: 1 }}
       transition={{
-        type: "spring",
+        type: "spring" as const,
         damping: 25, // Un poco más de amortiguación para que no rebote infinito
         stiffness: 80,
         mass: 1,
