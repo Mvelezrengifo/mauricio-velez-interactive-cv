@@ -12,6 +12,8 @@ export interface Project {
   longDescription?: string;
   impact?: string;
   challenges?: string[];
+
+   isBigData?: boolean;
 }
 
 export interface Phase {
