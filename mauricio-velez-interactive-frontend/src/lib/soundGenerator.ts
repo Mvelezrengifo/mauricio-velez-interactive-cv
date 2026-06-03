@@ -503,3 +503,7 @@ export class SoundGenerator {
 
 // Instancia singleton
 export const soundGenerator = new SoundGenerator();
+
+// Alias de compatibilidad para imports antiguos:
+// import { sound } from '@/lib/soundGenerator'
+export const sound = soundGenerator;
