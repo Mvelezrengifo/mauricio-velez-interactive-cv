@@ -1,0 +1,52 @@
+'use client';
+
+import { Phase } from '@/types/mountain';
+
+interface Props {
+  phase: Phase;
+  language: 'es' | 'en';
+  onProjectClick?: (project: any) => void;
+}
+
+// Estos son los lenguajes que Aura mostrará en la base de la montaña
+const languages = ['HTML', 'Java', 'C+', 'SQL', 'Python'];
+
+export default function BaseCimientos({ phase, language, onProjectClick }: Props) {
+  // Verificación de seguridad para que el componente no explote si la fase no carga
+  if (!phase) return null;
+
+  return (
+    <div className="text-center animate-fadeIn px-4">
+      {/* Usamos el narrador de la fase como título principal para que haya coherencia */}
+      <h2 className="text-3xl md:text-5xl font-extralight mb-6 text-white drop-shadow-md">
+        {language === 'es' ? 'Cimientos Tecnológicos' : 'Technological Foundations'}
+      </h2>
+
+      <p className="text-lg md:text-xl text-blue-300/80 mb-10 max-w-2xl mx-auto font-light italic">
+        {phase.narratorText}
+      </p>
+
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+        {languages.map((lang) => (
+          <div
+            key={lang}
+            className="group relative w-24 h-24 md:w-28 md:h-28 bg-black/40 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl md:text-2xl font-mono border border-white/10 hover:border-blue-500/50 transition-all duration-300 cursor-pointer overflow-hidden"
+            onClick={() => onProjectClick?.({
+              name: lang,
+              descriptionEs: `Lenguaje fundamental en los inicios de mi carrera técnica.`,
+              technologies: [lang],
+              color: 'text-blue-400'
+            })}
+          >
+            {/* Efecto de resplandor al pasar el mouse */}
+            <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <span className="relative z-10 text-white/70 group-hover:text-blue-400 transition-colors">
+              {lang}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

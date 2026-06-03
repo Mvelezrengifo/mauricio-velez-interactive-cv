@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Construcción de Sistemas",
+    "message": "Primero aprendimos a construir.",
+    "projects": [
+      { "name": "MokesClinic", "tech": ["Python", "SQL"] },
+      { "name": "MokesAgro", "tech": ["Java", "Oracle"] },
+      { "name": "Enterprise API", "tech": ["REST", "Microservices"] }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Integración",
+    "message": "Después aprendimos a conectar sistemas.",
+    "projects": [
+      { "name": "MOKES-JOB", "tech": ["Integration", "API Gateway"] }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Ingeniería de Datos",
+    "message": "Luego aprendimos a comprender datos.",
+    "projects": [
+      { "name": "Steam Analytics", "tech": ["ETL", "Analytics"] },
+      { "name": "Lakehouse Pipeline", "tech": ["Spark", "Data Lake"] },
+      { "name": "FinTrans", "tech": ["Transactions", "Real-time"] }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Cloud Computing",
+    "message": "Los sistemas crecieron y tuvieron que vivir en la nube.",
+    "projects": [
+      { "name": "Azure & Fabric", "tech": ["Microsoft", "Cloud"] },
+      { "name": "BigQuery", "tech": ["Google", "Data Warehouse"] },
+      { "name": "AWS Infrastructure", "tech": ["Lambda", "S3"] }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Inteligencia Artificial",
+    "message": "Después aprendimos a interpretar información.",
+    "projects": [
+      { "name": "MarketVision", "tech": ["AI", "Forecasting"] },
+      { "name": "AeroRisk", "tech": ["Risk Analysis", "ML"] }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Observabilidad y Enterprise",
+    "message": "Finalmente entendimos cómo unirlo todo.",
+    "projects": [
+      { "name": "NEXUS", "tech": ["Full Stack", "Observability", "AI"] }
+    ]
+  }
+]

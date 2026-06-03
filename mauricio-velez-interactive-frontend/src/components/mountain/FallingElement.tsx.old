@@ -1,0 +1,62 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Project } from '@/types/mountain';
+
+interface FallingElementProps {
+  project: Project; // Cambiamos 'element' por 'project' para que Aura lo entienda
+  index: number;
+  onClick: (project: Project) => void;
+}
+
+export default function FallingElement({ project, index, onClick }: FallingElementProps) {
+  // Verificación de seguridad
+  if (!project) return null;
+
+  return (
+    <motion.div
+      // Aparece desde arriba con un ligero toque aleatorio en X para que no caigan todos iguales
+      initial={{ y: -400, opacity: 0, x: (index % 2 === 0 ? -10 : 10) }}
+      animate={{ y: 0, opacity: 1, x: 0 }}
+      transition={{
+        type: 'spring',
+        damping: 20,
+        stiffness: 100,
+        // Reducimos el delay para que no bloquee la lógica de la siguiente fase
+        delay: index * 0.2,
+      }}
+      onClick={(e) => {
+        e.stopPropagation(); // Evitamos que el clic en el proyecto active el clic del fondo
+        onClick(project);
+      }}
+      className={`
+        w-32 h-32 md:w-40 md:h-40
+        bg-gradient-to-br from-blue-900/40 to-black/60
+        backdrop-blur-md border-2 border-blue-500/30
+        rounded-2xl flex flex-col items-center justify-center p-4
+        shadow-[0_0_20px_rgba(59,130,246,0.2)]
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]
+        hover:border-blue-400 transition-all cursor-pointer group
+      `}
+    >
+      <span className={`text-center font-bold text-sm md:text-base leading-tight ${project.color || 'text-white'}`}>
+        {project.name}
+      </span>
+
+      {project.technologies && (
+        <div className="mt-3 flex flex-wrap justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {project.technologies.slice(0, 3).map((tech) => (
+            <span key={tech} className="text-[9px] bg-blue-500/20 text-blue-200 px-1.5 py-0.5 rounded">
+              {tech}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Indicador visual de "Haz clic" */}
+      <div className="absolute bottom-2 opacity-0 group-hover:opacity-100 text-[8px] text-white/50 uppercase tracking-widest">
+        Ver Detalles
+      </div>
+    </motion.div>
+  );
+}

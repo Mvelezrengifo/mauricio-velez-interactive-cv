@@ -1,0 +1,57 @@
+'use client';
+
+import { useSound } from '@/components/sound/SoundManager';
+import { Language } from '@/types/mountain';
+import { translations } from '@/lib/translations';
+
+interface ControlBarProps {
+  isAutoScrolling: boolean;
+  onToggleAutoScroll: () => void;
+  language: Language;
+  onToggleLanguage: () => void;
+  onQuestion: () => void;
+}
+
+export default function ControlBar({
+  isAutoScrolling,
+  onToggleAutoScroll,
+  language,
+  onToggleLanguage,
+  onQuestion,
+}: ControlBarProps) {
+  const { isMuted, toggleMute } = useSound();
+  const t = translations[language];
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex gap-3">
+      <button
+        onClick={onToggleAutoScroll}
+        className="bg-black/60 backdrop-blur-md p-3 rounded-full hover:bg-blue-600/80 transition-all hud-border"
+        title={isAutoScrolling ? t.pause : t.continue}
+      >
+        {isAutoScrolling ? '⏸️' : '▶️'}
+      </button>
+      <button
+        onClick={toggleMute}
+        className="bg-black/60 backdrop-blur-md p-3 rounded-full hover:bg-blue-600/80 transition-all hud-border"
+        title={isMuted ? t.unmute : t.mute}
+      >
+        {isMuted ? '🔇' : '🔊'}
+      </button>
+      <button
+        onClick={onToggleLanguage}
+        className="bg-black/60 backdrop-blur-md p-3 rounded-full hover:bg-blue-600/80 transition-all hud-border"
+        title={t.language}
+      >
+        {language === 'es' ? '🇪🇸' : '🇺🇸'}
+      </button>
+      <button
+        onClick={onQuestion}
+        className="bg-black/60 backdrop-blur-md p-3 rounded-full hover:bg-blue-600/80 transition-all hud-border"
+        title={t.question}
+      >
+        💬
+      </button>
+    </div>
+  );
+}

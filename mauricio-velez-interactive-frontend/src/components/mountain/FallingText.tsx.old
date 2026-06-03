@@ -1,0 +1,62 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Project } from '@/types/mountain';
+import { useEffect, useState } from 'react';
+
+interface FallingTextProps {
+  project: Project; // Cambiado de 'element' a 'project' para unificar el modelo
+  index: number;
+  onClick: (project: Project) => void;
+  onLand?: () => void; // Evento vital para avisarle a la montaña que ya cayó
+}
+
+export default function FallingText({ project, index, onClick, onLand }: FallingTextProps) {
+  const [targetY, setTargetY] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+
+    // Calculamos el fondo de forma segura solo en el navegador
+    const calculateY = () => (typeof window !== 'undefined' ? window.innerHeight * 0.75 : 500);
+    setTargetY(calculateY());
+
+    const handleResize = () => setTargetY(calculateY());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (!project || !isClient) return null;
+
+  // Distribución horizontal fija basada en el índice para que no se amontonen
+  const leftPosition = 20 + (index % 4) * 18;
+
+  return (
+    <motion.div
+      initial={{ y: -300, opacity: 0, scale: 0.8 }}
+      animate={{ y: targetY, opacity: 1, scale: 1 }}
+      transition={{
+        type: 'spring',
+        damping: 22,
+        stiffness: 75,
+        delay: index * 0.3, // Delay controlado y fluido para no tragar la app
+      }}
+      onAnimationComplete={() => {
+        if (onLand) onLand(); // Le avisa al padre que el texto aterrizó con éxito
+      }}
+      onClick={(e) => {
+        e.stopPropagation(); // Evita pausar la montaña por accidente al hacer clic
+        onClick(project);
+      }}
+      style={{ left: `${leftPosition}%` }}
+      className={`fixed z-30 cursor-pointer hover:scale-110 transition-transform ${project.color || 'text-white'} text-3xl md:text-5xl font-extrabold tracking-tight whitespace-nowrap filter drop-shadow-[0_5px_15px_rgba(0,0,0,0.7)] select-none`}
+    >
+      <div className="relative group flex items-center gap-2">
+        {project.name}
+        {/* Un pequeño punto brillante que indica que es interactivo */}
+        <span className="w-2 h-2 rounded-full bg-current opacity-60 group-hover:opacity-100 transition-opacity animate-pulse" />
+      </div>
+    </motion.div>
+  );
+}
